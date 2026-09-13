@@ -2,9 +2,10 @@ import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
-import { db, UserRecord } from './server/db.js';
+import { db, UserRecord, PlanType } from './server/db.js';
 import { parseFileBuffer, analyzeDataset, executeProgrammaticQuery } from './server/analyzer.js';
 import { answerQuestionWithAi, generateFormulaWithAi, generateReportWithAi } from './server/ai.js';
+import { initializeTransaction, verifyTransaction, getPlanPricing } from './server/paystack.js';
 import { SAMPLE_SALES_DATA } from './src/data/sampleData.js';
 
 dotenv.config();
@@ -15,6 +16,40 @@ const PORT = 3000;
 // Body parsing with 15MB limit for spreadsheet uploads
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
+
+// Helper to format consistent user responses
+function formatUserResponse(user: UserRecord) {
+  const sub = db.getSubscription(user.id);
+  const usage = db.getMonthlyUsage(user.id);
+  const maxRows = sub.plan === 'free' ? 5000 : sub.plan === 'pro' ? 100000 : 500000;
+
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    plan: sub.plan,
+    created_at: user.created_at,
+    subscription: {
+      status: sub.status,
+      start_date: sub.start_date,
+      end_date: sub.end_date || null,
+      paystack_reference: sub.paystack_reference || null,
+    },
+    usage: {
+      analyses_this_month: usage.analyses_used,
+      analyses_limit: usage.analyses_limit,
+      analyses_remaining: usage.analyses_remaining,
+      current_month: usage.month,
+      // Backwards compatible aliases
+      uploads_this_month: usage.analyses_used,
+      uploads_limit: usage.analyses_limit,
+      ai_questions_used: usage.questions_used,
+      ai_questions_limit: usage.questions_limit,
+      max_rows_per_file: maxRows,
+      is_limit_reached: usage.is_limit_reached,
+    },
+  };
+}
 
 // Authentication middleware
 interface AuthRequest extends Request {
@@ -32,16 +67,6 @@ function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
     return res.status(401).json({ error: 'Session expired or invalid. Please log in again.' });
   }
   req.user = user;
-  next();
-}
-
-function optionalAuthMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.split(' ')[1];
-    const user = db.getUserByToken(token);
-    if (user) req.user = user;
-  }
   next();
 }
 
@@ -77,25 +102,11 @@ app.post('/api/auth/signup', (req: Request, res: Response) => {
     const passwordHash = db.hashPassword(password);
     const user = db.createUser(name.trim(), email, passwordHash);
     const token = db.createSession(user.id);
-    const sub = db.getSubscription(user.id);
 
     return res.status(201).json({
       message: 'Account created successfully!',
       token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        plan: sub.plan,
-        created_at: user.created_at,
-        usage: {
-          uploads_this_month: sub.uploads_this_month,
-          uploads_limit: sub.plan === 'free' ? 3 : Infinity,
-          ai_questions_used: sub.questions_count,
-          ai_questions_limit: sub.plan === 'free' ? 10 : Infinity,
-          max_rows_per_file: sub.plan === 'free' ? 5000 : 100000,
-        },
-      },
+      user: formatUserResponse(user),
     });
   } catch (err: any) {
     console.error('Signup error:', err);
@@ -122,25 +133,11 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
     }
 
     const token = db.createSession(user.id);
-    const sub = db.getSubscription(user.id);
 
     return res.json({
       message: 'Login successful!',
       token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        plan: sub.plan,
-        created_at: user.created_at,
-        usage: {
-          uploads_this_month: sub.uploads_this_month,
-          uploads_limit: sub.plan === 'free' ? 3 : Infinity,
-          ai_questions_used: sub.questions_count,
-          ai_questions_limit: sub.plan === 'free' ? 10 : Infinity,
-          max_rows_per_file: sub.plan === 'free' ? 5000 : 100000,
-        },
-      },
+      user: formatUserResponse(user),
     });
   } catch (err: any) {
     console.error('Login error:', err);
@@ -150,7 +147,6 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
 
 app.post('/api/auth/google', (req: Request, res: Response) => {
   try {
-    // Google Sign-In helper flow for seamless authentication
     const { email, name } = req.body;
     const targetEmail = email || 'google.user@excelai.app';
     const targetName = name || 'Google User';
@@ -162,29 +158,15 @@ app.post('/api/auth/google', (req: Request, res: Response) => {
     }
 
     const token = db.createSession(user.id);
-    const sub = db.getSubscription(user.id);
 
     return res.json({
-      message: 'Logged in with Google successfully!',
+      message: 'Logged in successfully!',
       token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        plan: sub.plan,
-        created_at: user.created_at,
-        usage: {
-          uploads_this_month: sub.uploads_this_month,
-          uploads_limit: sub.plan === 'free' ? 3 : Infinity,
-          ai_questions_used: sub.questions_count,
-          ai_questions_limit: sub.plan === 'free' ? 10 : Infinity,
-          max_rows_per_file: sub.plan === 'free' ? 5000 : 100000,
-        },
-      },
+      user: formatUserResponse(user),
     });
   } catch (err: any) {
     console.error('Google auth error:', err);
-    return res.status(500).json({ error: 'Failed to authenticate with Google.' });
+    return res.status(500).json({ error: 'Failed to authenticate.' });
   }
 });
 
@@ -198,23 +180,8 @@ app.post('/api/auth/logout', authMiddleware, (req: AuthRequest, res: Response) =
 });
 
 app.get('/api/auth/me', authMiddleware, (req: AuthRequest, res: Response) => {
-  const user = req.user!;
-  const sub = db.getSubscription(user.id);
   return res.json({
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      plan: sub.plan,
-      created_at: user.created_at,
-      usage: {
-        uploads_this_month: sub.uploads_this_month,
-        uploads_limit: sub.plan === 'free' ? 3 : Infinity,
-        ai_questions_used: sub.questions_count,
-        ai_questions_limit: sub.plan === 'free' ? 10 : Infinity,
-        max_rows_per_file: sub.plan === 'free' ? 5000 : 100000,
-      },
-    },
+    user: formatUserResponse(req.user!),
   });
 });
 
@@ -223,7 +190,6 @@ app.post('/api/auth/forgot-password', (req: Request, res: Response) => {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Please enter a valid email address.' });
   }
-  // Safe generic notification
   return res.json({
     message: `If an account exists for ${email}, a password reset link has been dispatched to your inbox.`,
   });
@@ -260,7 +226,127 @@ app.delete('/api/auth/delete-account', authMiddleware, (req: AuthRequest, res: R
 });
 
 // ----------------------------------------------------
-// FILE UPLOAD & PROCESSING ROUTES
+// PAYSTACK PAYMENT & SUBSCRIPTION ROUTES
+// ----------------------------------------------------
+
+// Initialize Paystack transaction securely server-side
+app.post('/api/paystack/initialize', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = req.user!;
+    const { plan, callbackUrl } = req.body;
+
+    if (!plan || !['pro', 'business'].includes(plan)) {
+      return res.status(400).json({ error: 'Please select a valid plan (pro or business).' });
+    }
+
+    const initResult = await initializeTransaction({
+      email: user.email,
+      plan,
+      userId: user.id,
+      callbackUrl,
+    });
+
+    const pricing = getPlanPricing(plan);
+
+    // Save initial pending payment in database
+    db.createPayment({
+      user_id: user.id,
+      amount: pricing.nairas,
+      currency: 'NGN',
+      reference: initResult.reference,
+      status: 'pending',
+      plan,
+    });
+
+    return res.json({
+      success: true,
+      authorization_url: initResult.authorization_url,
+      reference: initResult.reference,
+      access_code: initResult.access_code,
+      is_simulation: initResult.is_simulation,
+      amount: pricing.nairas,
+      currency: 'NGN',
+      plan,
+    });
+  } catch (err: any) {
+    console.error('Paystack initialization error:', err);
+    return res.status(500).json({
+      error: err.message || 'Failed to initialize Paystack payment transaction.',
+    });
+  }
+});
+
+// Verify transaction server-side and activate subscription
+app.post('/api/paystack/verify', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = req.user!;
+    const { reference, plan } = req.body;
+
+    if (!reference) {
+      return res.status(400).json({ error: 'Transaction reference is required for verification.' });
+    }
+
+    const targetPlan: 'pro' | 'business' = plan === 'business' ? 'business' : 'pro';
+
+    // Verify transaction with Paystack (or demo engine)
+    const verification = await verifyTransaction(reference, targetPlan);
+
+    if (verification.status !== 'success') {
+      db.updatePaymentStatus(reference, 'failed');
+      return res.status(400).json({
+        error: `Transaction was not successful (status: ${verification.status}). Subscription not updated.`,
+      });
+    }
+
+    // Update payment record in database
+    db.updatePaymentStatus(reference, 'success', verification.paid_at);
+
+    // Activate subscription in database
+    const sub = db.updatePlan(user.id, targetPlan, {
+      paystackReference: reference,
+    });
+
+    // Return updated user and subscription details
+    const updatedUser = db.findUserById(user.id)!;
+
+    return res.json({
+      success: true,
+      message: `Congratulations! Your ${targetPlan.toUpperCase()} subscription is now active.`,
+      plan: targetPlan,
+      subscription: sub,
+      user: formatUserResponse(updatedUser),
+    });
+  } catch (err: any) {
+    console.error('Paystack verification error:', err);
+    return res.status(500).json({
+      error: err.message || 'Unable to verify payment transaction.',
+    });
+  }
+});
+
+// Get user payment history
+app.get('/api/paystack/history', authMiddleware, (req: AuthRequest, res: Response) => {
+  const user = req.user!;
+  const payments = db.getPaymentsByUser(user.id);
+  return res.json({ payments });
+});
+
+// Direct plan changer (for manual administration or immediate testing)
+app.post('/api/subscription/upgrade', authMiddleware, (req: AuthRequest, res: Response) => {
+  const { plan } = req.body;
+  const targetPlan: PlanType = ['pro', 'business', 'free'].includes(plan) ? plan : 'pro';
+  const sub = db.updatePlan(req.user!.id, targetPlan);
+  const updatedUser = db.findUserById(req.user!.id)!;
+
+  return res.json({
+    message: `Plan updated to ${targetPlan.toUpperCase()} successfully!`,
+    subscription: sub,
+    user: formatUserResponse(updatedUser),
+  });
+});
+
+// ----------------------------------------------------
+// FILE UPLOAD & ANALYSIS ROUTES
 // ----------------------------------------------------
 
 app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) => {
@@ -268,10 +354,11 @@ app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) 
     const user = req.user!;
     const sub = db.getSubscription(user.id);
 
-    // 1. Enforce Free plan upload limits
-    if (sub.plan === 'free' && sub.uploads_this_month >= 3) {
+    // 1. Enforce Free Plan 5 Analyses / Month limit
+    const quotaCheck = db.canPerformAnalysis(user.id);
+    if (!quotaCheck.allowed) {
       return res.status(403).json({
-        error: "You've reached your free-plan limit. Upgrade to Pro to continue.",
+        error: quotaCheck.reason || "You've reached your free monthly limit of 5 spreadsheet analyses. Upgrade to Pro for unlimited analyses.",
         code: 'LIMIT_REACHED',
       });
     }
@@ -317,10 +404,11 @@ app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) 
       });
     }
 
-    // 3. Validate rows limit for Free tier
-    if (sub.plan === 'free' && parsed.rows.length > 5000) {
+    // 3. Validate rows limit based on plan
+    const maxRowsAllowed = sub.plan === 'free' ? 5000 : sub.plan === 'pro' ? 100000 : 500000;
+    if (parsed.rows.length > maxRowsAllowed) {
       return res.status(403).json({
-        error: "You've reached your free-plan limit. Your file contains more than 5,000 rows. Upgrade to Pro to continue.",
+        error: `Your file contains ${parsed.rows.length.toLocaleString()} rows. The ${sub.plan.toUpperCase()} plan limit is ${maxRowsAllowed.toLocaleString()} rows. Please upgrade to continue.`,
         code: 'LIMIT_REACHED',
       });
     }
@@ -328,7 +416,7 @@ app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) 
     // 4. Analyze dataset
     const analysis = analyzeDataset(parsed.rows, filename, parsed.selectedSheet, parsed.sheets);
 
-    // 5. Save file and analysis in database
+    // 5. Save file in database (which also increments monthly analysis counter)
     const savedFile = db.saveFile({
       user_id: user.id,
       filename,
@@ -351,7 +439,7 @@ app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) 
         all_sheets: parsed.sheets,
         row_count: parsed.rows.length,
         column_count: parsed.columns.length,
-        column_names: parsed.columns,
+        column_names: analysis.column_names,
         columns: analysis.columns,
       },
       data_quality: analysis.data_quality,
@@ -360,39 +448,52 @@ app.post('/api/files/upload', authMiddleware, (req: AuthRequest, res: Response) 
 
     return res.status(201).json({
       file: {
-        ...savedFile,
-        raw_data: undefined, // Don't send huge raw array in file metadata
+        id: savedFile.id,
+        user_id: savedFile.user_id,
+        filename: savedFile.filename,
+        file_type: savedFile.file_type,
+        file_size: savedFile.file_size,
+        row_count: savedFile.row_count,
+        column_count: savedFile.column_count,
+        sheet_name: savedFile.sheet_name,
+        all_sheets: savedFile.all_sheets,
+        uploaded_at: savedFile.uploaded_at,
+        last_analyzed: savedFile.uploaded_at,
       },
       analysis,
     });
   } catch (err: any) {
-    console.error('File upload route error:', err);
-    return res.status(500).json({
-      error: "ExcelAI couldn't process your request right now. Please try again.",
-    });
+    console.error('File upload error:', err);
+    return res.status(500).json({ error: 'Failed to process spreadsheet. Please try again.' });
   }
 });
 
-// Load built-in sample sales dataset
+// Load sample dataset
 app.post('/api/files/sample', authMiddleware, (req: AuthRequest, res: Response) => {
   try {
     const user = req.user!;
-    const filename = 'Enterprise_Sales_2024.xlsx';
-    const rows = SAMPLE_SALES_DATA;
-    const columns = Object.keys(rows[0]);
+    const quotaCheck = db.canPerformAnalysis(user.id);
+    if (!quotaCheck.allowed) {
+      return res.status(403).json({
+        error: quotaCheck.reason || "You've reached your free monthly limit of 5 spreadsheet analyses. Upgrade to Pro for unlimited analyses.",
+        code: 'LIMIT_REACHED',
+      });
+    }
 
-    const analysis = analyzeDataset(rows, filename, 'Sales_Records', ['Sales_Records']);
+    const sampleRows = SAMPLE_SALES_DATA;
+    const filename = 'Enterprise_Sales_Q4_2025.xlsx';
+    const analysis = analyzeDataset(sampleRows, filename, 'Sales Data', ['Sales Data', 'Summary KPI']);
 
     const savedFile = db.saveFile({
       user_id: user.id,
       filename,
       file_type: 'xlsx',
-      file_size: 45200,
-      row_count: rows.length,
-      column_count: columns.length,
-      sheet_name: 'Sales_Records',
-      all_sheets: ['Sales_Records'],
-      raw_data: rows,
+      file_size: 142500,
+      row_count: sampleRows.length,
+      column_count: Object.keys(sampleRows[0] || {}).length,
+      sheet_name: 'Sales Data',
+      all_sheets: ['Sales Data', 'Summary KPI'],
+      raw_data: sampleRows,
     });
 
     analysis.file_id = savedFile.id;
@@ -401,11 +502,11 @@ app.post('/api/files/sample', authMiddleware, (req: AuthRequest, res: Response) 
       user_id: user.id,
       metadata: {
         filename,
-        sheet_name: 'Sales_Records',
-        all_sheets: ['Sales_Records'],
-        row_count: rows.length,
-        column_count: columns.length,
-        column_names: columns,
+        sheet_name: 'Sales Data',
+        all_sheets: ['Sales Data', 'Summary KPI'],
+        row_count: sampleRows.length,
+        column_count: Object.keys(sampleRows[0] || {}).length,
+        column_names: analysis.column_names,
         columns: analysis.columns,
       },
       data_quality: analysis.data_quality,
@@ -414,18 +515,27 @@ app.post('/api/files/sample', authMiddleware, (req: AuthRequest, res: Response) 
 
     return res.status(201).json({
       file: {
-        ...savedFile,
-        raw_data: undefined,
+        id: savedFile.id,
+        user_id: savedFile.user_id,
+        filename: savedFile.filename,
+        file_type: savedFile.file_type,
+        file_size: savedFile.file_size,
+        row_count: savedFile.row_count,
+        column_count: savedFile.column_count,
+        sheet_name: savedFile.sheet_name,
+        all_sheets: savedFile.all_sheets,
+        uploaded_at: savedFile.uploaded_at,
+        last_analyzed: savedFile.uploaded_at,
       },
       analysis,
     });
   } catch (err: any) {
-    console.error('Sample data error:', err);
+    console.error('Sample data load failure:', err);
     return res.status(500).json({ error: 'Failed to load sample dataset.' });
   }
 });
 
-// List user files
+// List all files for current user
 app.get('/api/files', authMiddleware, (req: AuthRequest, res: Response) => {
   const files = db.getFilesByUser(req.user!.id).map(f => ({
     id: f.id,
@@ -443,48 +553,69 @@ app.get('/api/files', authMiddleware, (req: AuthRequest, res: Response) => {
   return res.json({ files });
 });
 
-// Get specific file and its analysis
+// Get single file details and its analysis
 app.get('/api/files/:id', authMiddleware, (req: AuthRequest, res: Response) => {
   const fileId = req.params.id;
   const file = db.getFileById(fileId, req.user!.id);
   if (!file) {
-    return res.status(404).json({ error: 'Spreadsheet not found or you do not have permission to access it.' });
+    return res.status(404).json({ error: 'Spreadsheet not found.' });
   }
 
   const analysisRecord = db.getAnalysisByFileId(fileId, req.user!.id);
-  let analysis: any = null;
+  if (!analysisRecord) {
+    // Re-generate analysis if not cached
+    const analysis = analyzeDataset(file.raw_data, file.filename, file.sheet_name, file.all_sheets);
+    analysis.file_id = file.id;
+    db.saveAnalysis({
+      file_id: file.id,
+      user_id: req.user!.id,
+      metadata: {
+        filename: file.filename,
+        sheet_name: file.sheet_name,
+        all_sheets: file.all_sheets,
+        row_count: file.row_count,
+        column_count: file.column_count,
+        column_names: analysis.column_names,
+        columns: analysis.columns,
+      },
+      data_quality: analysis.data_quality,
+      insights: analysis.insights,
+    });
+    return res.json({ file: { ...file, raw_data: undefined }, analysis });
+  }
 
-  if (analysisRecord) {
-    analysis = {
+  return res.json({
+    file: {
+      id: file.id,
+      user_id: file.user_id,
+      filename: file.filename,
+      file_type: file.file_type,
+      file_size: file.file_size,
+      row_count: file.row_count,
+      column_count: file.column_count,
+      sheet_name: file.sheet_name,
+      all_sheets: file.all_sheets,
+      uploaded_at: file.uploaded_at,
+      last_analyzed: file.uploaded_at,
+    },
+    analysis: {
       id: analysisRecord.id,
       file_id: file.id,
       sheet_name: file.sheet_name,
-      all_sheets: file.all_sheets || [file.sheet_name],
+      all_sheets: file.all_sheets,
       row_count: file.row_count,
       column_count: file.column_count,
       column_names: analysisRecord.metadata.column_names || [],
       columns: analysisRecord.metadata.columns || [],
       data_quality: analysisRecord.data_quality,
       insights: analysisRecord.insights,
-      preview_rows: file.raw_data.slice(0, 500),
+      preview_rows: file.raw_data.slice(0, 100),
       created_at: analysisRecord.created_at,
-    };
-  } else {
-    // Generate fresh analysis if not cached
-    analysis = analyzeDataset(file.raw_data, file.filename, file.sheet_name, file.all_sheets || [file.sheet_name]);
-    analysis.file_id = file.id;
-  }
-
-  return res.json({
-    file: {
-      ...file,
-      raw_data: undefined,
     },
-    analysis,
   });
 });
 
-// Switch worksheet for an Excel file
+// Switch worksheet tab
 app.post('/api/files/:id/sheet', authMiddleware, (req: AuthRequest, res: Response) => {
   const fileId = req.params.id;
   const { sheetName } = req.body;
@@ -493,9 +624,8 @@ app.post('/api/files/:id/sheet', authMiddleware, (req: AuthRequest, res: Respons
     return res.status(404).json({ error: 'Spreadsheet not found.' });
   }
 
-  // Update sheet name and re-analyze
   file.sheet_name = sheetName;
-  const analysis = analyzeDataset(file.raw_data, file.filename, sheetName, file.all_sheets || [sheetName]);
+  const analysis = analyzeDataset(file.raw_data, file.filename, sheetName, file.all_sheets);
   analysis.file_id = file.id;
 
   db.saveAnalysis({
@@ -528,10 +658,9 @@ app.delete('/api/files/:id', authMiddleware, (req: AuthRequest, res: Response) =
 });
 
 // ----------------------------------------------------
-// AI ASSISTANT, FORMULAS & REPORTS
+// AI ASSISTANT, FORMULAS & REPORTS (SECURE SERVER-SIDE)
 // ----------------------------------------------------
 
-// Ask ExcelAI
 app.post('/api/ai/ask', authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
     const user = req.user!;
@@ -547,11 +676,14 @@ app.post('/api/ai/ask', authMiddleware, async (req: AuthRequest, res: Response) 
     }
 
     // Check Free Plan question limits
-    if (sub.plan === 'free' && sub.questions_count >= 10) {
-      return res.status(403).json({
-        error: "You've reached your free-plan limit of 10 AI questions. Upgrade to Pro to continue asking questions.",
-        code: 'LIMIT_REACHED',
-      });
+    if (sub.plan === 'free') {
+      const usage = db.getMonthlyUsage(user.id);
+      if (usage.questions_used >= 10) {
+        return res.status(403).json({
+          error: "You've reached your free-plan limit of 10 AI questions. Upgrade to Pro to continue asking questions.",
+          code: 'LIMIT_REACHED',
+        });
+      }
     }
 
     const file = db.getFileById(fileId, user.id);
@@ -562,10 +694,10 @@ app.post('/api/ai/ask', authMiddleware, async (req: AuthRequest, res: Response) 
     const analysisRecord = db.getAnalysisByFileId(fileId, user.id);
     const columns = analysisRecord?.metadata?.columns || [];
 
-    // 1. Programmatic computation first (no AI hallucinations!)
+    // 1. Programmatic computation first (no AI hallucinations)
     const programmaticResult = executeProgrammaticQuery(question, file.raw_data, columns);
 
-    // 2. Conversation handling
+    // 2. Conversation tracking
     const conversation = db.getOrCreateConversation(user.id, file.id);
     db.addMessage({
       conversation_id: conversation.id,
@@ -574,7 +706,7 @@ app.post('/api/ai/ask', authMiddleware, async (req: AuthRequest, res: Response) 
       content: question,
     });
 
-    // 3. AI natural explanation with verified numbers
+    // 3. AI natural explanation with verified numbers (Gemini API server-side)
     const aiResult = await answerQuestionWithAi(question, {
       filename: file.filename,
       rowCount: file.row_count,
@@ -605,7 +737,6 @@ app.post('/api/ai/ask', authMiddleware, async (req: AuthRequest, res: Response) 
   }
 });
 
-// Get conversation messages
 app.get('/api/ai/conversation/:fileId', authMiddleware, (req: AuthRequest, res: Response) => {
   const fileId = req.params.fileId;
   const conversation = db.getOrCreateConversation(req.user!.id, fileId);
@@ -613,7 +744,6 @@ app.get('/api/ai/conversation/:fileId', authMiddleware, (req: AuthRequest, res: 
   return res.json({ messages });
 });
 
-// Excel Formula Generator
 app.post('/api/ai/formula', authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
     const { prompt } = req.body;
@@ -631,7 +761,6 @@ app.post('/api/ai/formula', authMiddleware, async (req: AuthRequest, res: Respon
   }
 });
 
-// AI Report Generator
 app.post('/api/ai/report', authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
     const { fileId } = req.body;
@@ -666,18 +795,6 @@ app.post('/api/ai/report', authMiddleware, async (req: AuthRequest, res: Respons
       error: 'Failed to generate report. Please try again.',
     });
   }
-});
-
-// Subscription plan upgrade/toggle
-app.post('/api/subscription/upgrade', authMiddleware, (req: AuthRequest, res: Response) => {
-  const { plan } = req.body;
-  const targetPlan = plan === 'free' ? 'free' : 'pro';
-  const sub = db.updatePlan(req.user!.id, targetPlan);
-
-  return res.json({
-    message: `Plan updated to ${targetPlan.toUpperCase()} successfully!`,
-    subscription: sub,
-  });
 });
 
 // ----------------------------------------------------

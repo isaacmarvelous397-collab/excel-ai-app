@@ -13,6 +13,7 @@ import { ReportGeneratorSection } from './components/ReportGeneratorSection';
 import { MyFilesSection } from './components/MyFilesSection';
 import { PricingSection } from './components/PricingSection';
 import { SettingsSection } from './components/SettingsSection';
+import { BillingDashboard } from './components/BillingDashboard';
 import { api } from './lib/api';
 import { SpreadsheetFile, SpreadsheetAnalysis } from './types';
 import { Menu, FileSpreadsheet, AlertCircle } from 'lucide-react';
@@ -260,6 +261,10 @@ function AppContent() {
             )}
 
             {currentView === 'pricing' && <PricingSection />}
+
+            {currentView === 'billing' && (
+              <BillingDashboard onNavigatePricing={() => setCurrentView('pricing')} />
+            )}
 
             {currentView === 'settings' && <SettingsSection />}
           </div>

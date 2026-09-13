@@ -1,4 +1,4 @@
-import { User, SpreadsheetFile, SpreadsheetAnalysis, ChatMessage, FormulaResult, AiReport } from '../types';
+import { User, SpreadsheetFile, SpreadsheetAnalysis, ChatMessage, FormulaResult, AiReport, PlanType, PaymentHistoryItem } from '../types';
 
 const TOKEN_KEY = 'excelai_auth_token';
 
@@ -182,9 +182,42 @@ export const api = {
     });
   },
 
-  // Subscriptions
-  async upgradePlan(plan: 'free' | 'pro') {
-    return request<{ message: string; subscription: any }>('/api/subscription/upgrade', {
+  // Subscriptions & Paystack Payments
+  async initializePayment(plan: 'pro' | 'business', callbackUrl?: string) {
+    return request<{
+      success: boolean;
+      authorization_url: string;
+      reference: string;
+      access_code: string;
+      is_simulation?: boolean;
+      amount: number;
+      currency: string;
+      plan: 'pro' | 'business';
+    }>('/api/paystack/initialize', {
+      method: 'POST',
+      body: JSON.stringify({ plan, callbackUrl }),
+    });
+  },
+
+  async verifyPayment(reference: string, plan: 'pro' | 'business') {
+    return request<{
+      success: boolean;
+      message: string;
+      plan: 'pro' | 'business';
+      subscription: any;
+      user: User;
+    }>('/api/paystack/verify', {
+      method: 'POST',
+      body: JSON.stringify({ reference, plan }),
+    });
+  },
+
+  async getPaymentHistory() {
+    return request<{ payments: PaymentHistoryItem[] }>('/api/paystack/history');
+  },
+
+  async upgradePlan(plan: PlanType) {
+    return request<{ message: string; subscription: any; user?: User }>('/api/subscription/upgrade', {
       method: 'POST',
       body: JSON.stringify({ plan }),
     });

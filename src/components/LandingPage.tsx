@@ -341,31 +341,31 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrySample }
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
             {/* Free Tier */}
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+            <div className="bg-white p-7 sm:p-8 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Free Plan</span>
                 <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold text-slate-900">₦0</span>
+                  <span className="text-3xl font-black text-slate-900">₦0</span>
                   <span className="text-xs text-slate-500">/ month</span>
                 </div>
-                <p className="text-xs text-slate-600 mt-2">
-                  Ideal for casual analysis, quick validations, and exploring your spreadsheets.
+                <p className="text-xs text-slate-600 mt-2 min-h-[34px]">
+                  Ideal for casual analysis, small audits, and testing spreadsheets.
                 </p>
 
                 <ul className="mt-6 space-y-3 text-xs text-slate-700">
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>3 uploads per month</span>
+                    <span><strong>5 analyses per month</strong></span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Maximum 5,000 rows per file</span>
+                    <span>Up to 5,000 rows per file</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>10 AI questions per file</span>
+                    <span>10 AI questions per session</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -373,68 +373,108 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrySample }
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Standard data quality audit</span>
+                    <span>Automated data quality audit</span>
                   </li>
                 </ul>
               </div>
 
               <button
                 onClick={onStart}
-                className="mt-8 w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors"
+                className="mt-8 w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
               >
                 Start Free
               </button>
             </div>
 
             {/* Pro Tier */}
-            <div className="bg-slate-900 text-white p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                Recommended
+            <div className="bg-slate-900 text-white p-7 sm:p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-4 right-4 bg-emerald-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                Most Popular
               </div>
 
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Pro Plan</span>
                 <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold text-white">₦7,500</span>
+                  <span className="text-3xl font-black text-white">₦5,000</span>
                   <span className="text-xs text-slate-400">/ month</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
-                  For business professionals, analysts, and teams requiring high volume processing.
+                <p className="text-xs text-slate-300 mt-2 min-h-[34px]">
+                  For business professionals, analysts, and operators requiring unlimited analysis.
                 </p>
 
                 <ul className="mt-6 space-y-3 text-xs text-slate-300">
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Unlimited file uploads</span>
+                    <span><strong>Unlimited spreadsheet analyses</strong></span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Large files (up to 100,000+ rows)</span>
+                    <span>Large files up to 100,000 rows</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Unlimited AI questions</span>
+                    <span>Unlimited AI questions & chat</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Advanced charts & customizable exports</span>
+                    <span>AI Formula Generator & Assistant</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>Executive AI Report Generator</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Priority GPU computation & support</span>
                   </li>
                 </ul>
               </div>
 
               <button
                 onClick={onStart}
-                className="mt-8 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 transition-all"
+                className="mt-8 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 transition-all cursor-pointer"
               >
-                Upgrade to Pro
+                Upgrade to Pro (₦5,000)
+              </button>
+            </div>
+
+            {/* Business Tier */}
+            <div className="bg-white p-7 sm:p-8 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-700">Business Plan</span>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span className="text-3xl font-black text-slate-900">₦15,000</span>
+                  <span className="text-xs text-slate-500">/ month</span>
+                </div>
+                <p className="text-xs text-slate-600 mt-2 min-h-[34px]">
+                  For growing organizations with massive datasets and team workflows.
+                </p>
+
+                <ul className="mt-6 space-y-3 text-xs text-slate-700">
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
+                    <span><strong>Up to 500,000 rows</strong> per file</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
+                    <span>Multi-sheet cross-correlation audit</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
+                    <span>Priority dedicated AI compute</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
+                    <span>Custom formula rules & logic</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
+                    <span>Team collaboration ready</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                onClick={onStart}
+                className="mt-8 w-full py-3 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-md shadow-purple-700/25 transition-all cursor-pointer"
+              >
+                Get Business (₦15,000)
               </button>
             </div>
           </div>

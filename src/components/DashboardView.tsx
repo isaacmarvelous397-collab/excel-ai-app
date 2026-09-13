@@ -39,9 +39,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [fileToDelete, setFileToDelete] = useState<SpreadsheetFile | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
-  // Check upload limit
-  const isUploadLimitReached =
-    user?.plan === 'free' && (user?.usage?.uploads_this_month || 0) >= (user?.usage?.uploads_limit || 3);
+  // Check monthly analyses limit (5 for free plan)
+  const analysesUsed = user?.usage?.analyses_this_month ?? user?.usage?.uploads_this_month ?? 0;
+  const isUploadLimitReached = user?.plan === 'free' && analysesUsed >= 5;
+  const remainingAnalyses = user?.plan === 'free' ? Math.max(0, 5 - analysesUsed) : Infinity;
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -206,21 +207,69 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       )}
 
+      {/* Plan Status & Monthly Analysis Quota Bar */}
+      <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 ${
+              user?.plan === 'business'
+                ? 'bg-purple-100 text-purple-800'
+                : user?.plan === 'pro'
+                ? 'bg-emerald-100 text-emerald-800'
+                : 'bg-slate-100 text-slate-700'
+            }`}
+          >
+            {user?.plan === 'business' ? 'BIZ' : user?.plan === 'pro' ? 'PRO' : 'FREE'}
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Current Plan</span>
+              <span className="text-xs font-black text-slate-800 capitalize">{user?.plan || 'free'} Tier</span>
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">
+              {user?.plan === 'free' ? (
+                <>
+                  Monthly analyses: <strong className="text-slate-800">{analysesUsed} of 5 used</strong> ({remainingAnalyses} remaining this month)
+                </>
+              ) : (
+                <>
+                  <strong className="text-emerald-700">Unlimited spreadsheet analyses</strong> active (Up to {user?.plan === 'business' ? '500,000' : '100,000'} rows)
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+
+        {user?.plan === 'free' ? (
+          <button
+            onClick={onUpgradeClick}
+            className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5 shrink-0"
+          >
+            <span>Upgrade to Pro</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        ) : (
+          <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 shrink-0">
+            ✓ Full Access Enabled
+          </span>
+        )}
+      </div>
+
       {/* Limit Reached Warning banner if applicable */}
       {isUploadLimitReached && (
-        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-4">
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
             <div className="text-xs">
-              <p className="font-bold text-amber-900">Upload Limit Reached (3 / 3 files used)</p>
-              <p className="text-amber-700">You've reached your free-plan limit. Upgrade to Pro for unlimited spreadsheet analysis.</p>
+              <p className="font-bold text-amber-900">Monthly Limit Reached (5 / 5 analyses used)</p>
+              <p className="text-amber-700">You've reached your free monthly limit of 5 spreadsheet analyses. Upgrade to Pro for unlimited analyses and 100k rows.</p>
             </div>
           </div>
           <button
             onClick={onUpgradeClick}
             className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg shadow-sm shrink-0"
           >
-            Upgrade to Pro
+            Upgrade to Pro (₦5,000)
           </button>
         </div>
       )}

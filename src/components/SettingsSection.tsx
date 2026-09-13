@@ -99,38 +99,44 @@ export const SettingsSection: React.FC = () => {
             <p className="text-xs text-slate-500">Your current billing tier and resource limits</p>
           </div>
           <span
-            className={`text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 ${
-              user?.plan === 'pro'
-                ? 'bg-amber-100 text-amber-800 border border-amber-300'
+            className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 ${
+              user?.plan === 'business'
+                ? 'bg-purple-100 text-purple-800 border border-purple-300'
+                : user?.plan === 'pro'
+                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                 : 'bg-slate-100 text-slate-800 border border-slate-200'
             }`}
           >
-            {user?.plan === 'pro' && <Crown className="w-3.5 h-3.5" />}
+            {user?.plan === 'pro' && <Crown className="w-3.5 h-3.5 text-emerald-700" />}
             <span>{user?.plan || 'FREE'} PLAN</span>
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-xs">
           <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-slate-500 block text-[11px] font-medium">Monthly Spreadsheets</span>
+            <span className="text-slate-500 block text-[11px] font-medium">Monthly Analyses</span>
             <div className="flex items-baseline justify-between mt-1">
               <span className="text-base font-bold text-slate-900">
-                {user?.usage?.uploads_limit === Infinity ? 'Unlimited' : `${user?.usage?.uploads_this_month || 0} used`}
+                {user?.plan === 'free'
+                  ? `${user?.usage?.analyses_this_month ?? user?.usage?.uploads_this_month ?? 0} of 5 used`
+                  : 'Unlimited'}
               </span>
               <span className="text-slate-500 text-[11px]">
-                {user?.usage?.uploads_limit === Infinity ? 'Pro Tier' : `Limit: ${user?.usage?.uploads_limit || 3}`}
+                {user?.plan === 'free'
+                  ? `${Math.max(0, 5 - (user?.usage?.analyses_this_month ?? user?.usage?.uploads_this_month ?? 0))} remaining`
+                  : 'Active'}
               </span>
             </div>
           </div>
 
           <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-slate-500 block text-[11px] font-medium">AI Questions Asked</span>
+            <span className="text-slate-500 block text-[11px] font-medium">Maximum Processable Rows</span>
             <div className="flex items-baseline justify-between mt-1">
               <span className="text-base font-bold text-slate-900">
-                {user?.usage?.ai_questions_limit === Infinity ? 'Unlimited' : `${user?.usage?.ai_questions_used || 0} used`}
+                {user?.plan === 'business' ? '500,000' : user?.plan === 'pro' ? '100,000' : '5,000'} rows
               </span>
               <span className="text-slate-500 text-[11px]">
-                {user?.usage?.ai_questions_limit === Infinity ? 'Pro Tier' : `Limit: ${user?.usage?.ai_questions_limit || 10}`}
+                {user?.plan === 'free' ? 'Upgrade for 100k' : 'High Volume'}
               </span>
             </div>
           </div>

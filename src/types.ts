@@ -1,4 +1,11 @@
-export type PlanType = 'free' | 'pro';
+export type PlanType = 'free' | 'pro' | 'business';
+
+export interface SubscriptionInfo {
+  status: 'active' | 'cancelled' | 'expired';
+  start_date: string;
+  end_date?: string | null;
+  paystack_reference?: string | null;
+}
 
 export interface User {
   id: string;
@@ -6,13 +13,31 @@ export interface User {
   email: string;
   plan: PlanType;
   created_at: string;
+  subscription?: SubscriptionInfo;
   usage: {
+    analyses_this_month: number;
+    analyses_limit: number;
+    analyses_remaining: number;
+    current_month?: string;
     uploads_this_month: number;
     uploads_limit: number;
     ai_questions_used: number;
     ai_questions_limit: number;
     max_rows_per_file: number;
+    is_limit_reached?: boolean;
   };
+}
+
+export interface PaymentHistoryItem {
+  id: string;
+  user_id: string;
+  amount: number;
+  currency: string;
+  reference: string;
+  status: 'success' | 'pending' | 'failed';
+  plan: 'pro' | 'business';
+  paid_at?: string;
+  created_at: string;
 }
 
 export interface ColumnProfile {

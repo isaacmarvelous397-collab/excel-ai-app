@@ -13,6 +13,7 @@ import {
   ChevronRight,
   FileSpreadsheet,
   Zap,
+  CreditCard,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { SpreadsheetFile } from '../types';
@@ -41,7 +42,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'assistant', label: 'AI Assistant', icon: BotMessageSquare, requiresFile: true },
     { id: 'formulas', label: 'Formula Generator', icon: Binary },
     { id: 'reports', label: 'Reports', icon: FileText, requiresFile: true },
-    { id: 'pricing', label: 'Pricing', icon: Crown },
+    { id: 'pricing', label: 'Pricing Plans', icon: Crown },
+    { id: 'billing', label: 'Billing & Usage', icon: CreditCard },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
@@ -54,8 +56,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
     setMobileOpen(false);
   };
 
-  const uploadQuota = user?.usage?.uploads_limit === Infinity ? 'Unlimited' : `${user?.usage?.uploads_this_month || 0} / ${user?.usage?.uploads_limit || 3}`;
-  const questionsQuota = user?.usage?.ai_questions_limit === Infinity ? 'Unlimited' : `${user?.usage?.ai_questions_used || 0} / ${user?.usage?.ai_questions_limit || 10}`;
+  const plan = user?.plan || 'free';
+  const analysesUsed = user?.usage?.analyses_this_month ?? user?.usage?.uploads_this_month ?? 0;
+  const analysesQuota = plan === 'free' ? `${analysesUsed} / 5 used` : 'Unlimited';
+  const remaining = plan === 'free' ? Math.max(0, 5 - analysesUsed) : null;
 
   return (
     <>
@@ -158,26 +162,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-bold text-slate-800 flex items-center gap-1">
                 <Zap className="w-3.5 h-3.5 text-amber-500" />
-                {user?.plan === 'pro' ? 'Pro Plan' : 'Free Quota'}
+                <span className="capitalize">{plan} Plan</span>
               </span>
-              {user?.plan === 'free' && (
+              {plan === 'free' ? (
                 <button
                   onClick={() => setCurrentView('pricing')}
-                  className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700"
+                  className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer"
                 >
                   Upgrade
                 </button>
+              ) : (
+                <span className="text-[9px] font-bold uppercase text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                  Active
+                </span>
               )}
             </div>
             <div className="space-y-1.5 text-[10px] text-slate-600">
               <div className="flex justify-between">
-                <span>Monthly Uploads:</span>
-                <span className="font-semibold text-slate-800">{uploadQuota}</span>
+                <span>Monthly Analyses:</span>
+                <span className="font-semibold text-slate-800">{analysesQuota}</span>
               </div>
-              <div className="flex justify-between">
-                <span>AI Questions:</span>
-                <span className="font-semibold text-slate-800">{questionsQuota}</span>
-              </div>
+              {remaining !== null && (
+                <div className="flex justify-between">
+                  <span>Remaining:</span>
+                  <span className={`font-semibold ${remaining === 0 ? 'text-red-600' : 'text-emerald-700'}`}>
+                    {remaining} left
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
