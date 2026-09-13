@@ -1,0 +1,878 @@
+{
+  "users": [
+    {
+      "id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "name": "Ada Lovelace",
+      "email": "ada@lovelace.io",
+      "password_hash": "1b72c5f133c1dbe3c5a7dfc10b9d30e1:cc3b1c6b6810d884f7c9f5d1b756030474aa41b4df0148575f48c3c35407868e1fbb773dd1bafeac939d2841b78b92b4174f137958ccd4c3345a5945197ec518",
+      "created_at": "2026-09-11T18:48:13.560Z"
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub_b59a59aa-eeda-4bd0-8c48-a15038f303f8",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "plan": "free",
+      "status": "active",
+      "uploads_this_month": 1,
+      "questions_count": 1,
+      "created_at": "2026-09-11T18:48:13.560Z"
+    }
+  ],
+  "files": [
+    {
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "filename": "Enterprise_Sales_2024.xlsx",
+      "file_type": "xlsx",
+      "file_size": 45200,
+      "row_count": 35,
+      "column_count": 9,
+      "sheet_name": "Sales_Records",
+      "all_sheets": [
+        "Sales_Records"
+      ],
+      "raw_data": [
+        {
+          "Date": "2024-01-05",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "Apex Zenith Corp",
+          "Quantity": 4,
+          "Revenue": 1200000,
+          "Cost": 480000,
+          "Profit": 720000
+        },
+        {
+          "Date": "2024-01-08",
+          "Product": "Analytics Pro License",
+          "Category": "Software",
+          "Region": "Abuja",
+          "Customer": "First Horizon Ltd",
+          "Quantity": 10,
+          "Revenue": 650000,
+          "Cost": 260000,
+          "Profit": 390000
+        },
+        {
+          "Date": "2024-01-12",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Port Harcourt",
+          "Customer": "Delta Stream Oil",
+          "Quantity": 2,
+          "Revenue": 950000,
+          "Cost": 620000,
+          "Profit": 330000
+        },
+        {
+          "Date": "2024-01-15",
+          "Product": "Cloud Backup Vault",
+          "Category": "Services",
+          "Region": "Lagos",
+          "Customer": "Sterling Prime Logistics",
+          "Quantity": 15,
+          "Revenue": 450000,
+          "Cost": 180000,
+          "Profit": 270000
+        },
+        {
+          "Date": "2024-01-20",
+          "Product": "Database High-Availability",
+          "Category": "Software",
+          "Region": "Kano",
+          "Customer": "Savanna Trade Network",
+          "Quantity": 5,
+          "Revenue": 820000,
+          "Cost": 330000,
+          "Profit": 490000
+        },
+        {
+          "Date": "2024-01-25",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Abuja",
+          "Customer": "Federal Capital Finance",
+          "Quantity": 8,
+          "Revenue": 2400000,
+          "Cost": 960000,
+          "Profit": 1440000
+        },
+        {
+          "Date": "2024-01-29",
+          "Product": "Managed Support Tier 1",
+          "Category": "Services",
+          "Region": "Ibadan",
+          "Customer": "Oyo Agro Solutions",
+          "Quantity": 12,
+          "Revenue": 360000,
+          "Cost": 120000,
+          "Profit": 240000
+        },
+        {
+          "Date": "2024-02-03",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "BlueWave Tech Labs",
+          "Quantity": 20,
+          "Revenue": 1500000,
+          "Cost": 450000,
+          "Profit": 1050000
+        },
+        {
+          "Date": "2024-02-07",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Lagos",
+          "Customer": "Eko Atlantic Commerce",
+          "Quantity": 3,
+          "Revenue": 1425000,
+          "Cost": 930000,
+          "Profit": 495000
+        },
+        {
+          "Date": "2024-02-11",
+          "Product": "Analytics Pro License",
+          "Category": "Software",
+          "Region": "Port Harcourt",
+          "Customer": "Gulf Marine Services",
+          "Quantity": 6,
+          "Revenue": 390000,
+          "Cost": 156000,
+          "Profit": 234000
+        },
+        {
+          "Date": "2024-02-16",
+          "Product": "Cloud Backup Vault",
+          "Category": "Services",
+          "Region": "Abuja",
+          "Customer": "Unity Capital Partners",
+          "Quantity": 25,
+          "Revenue": 750000,
+          "Cost": 300000,
+          "Profit": 450000
+        },
+        {
+          "Date": "2024-02-21",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Kano",
+          "Customer": "Arewa Agro Group",
+          "Quantity": 3,
+          "Revenue": 900000,
+          "Cost": 360000,
+          "Profit": 540000
+        },
+        {
+          "Date": "2024-02-26",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "PayDirect Systems",
+          "Quantity": 14,
+          "Revenue": 1050000,
+          "Cost": 315000,
+          "Profit": 735000
+        },
+        {
+          "Date": "2024-03-02",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "Apex Zenith Corp",
+          "Quantity": 6,
+          "Revenue": 1800000,
+          "Cost": 720000,
+          "Profit": 1080000
+        },
+        {
+          "Date": "2024-03-06",
+          "Product": "Database High-Availability",
+          "Category": "Software",
+          "Region": "Abuja",
+          "Customer": "Federal Capital Finance",
+          "Quantity": 7,
+          "Revenue": 1148000,
+          "Cost": 462000,
+          "Profit": 686000
+        },
+        {
+          "Date": "2024-03-10",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Abuja",
+          "Customer": "Nexus Defense Systems",
+          "Quantity": 5,
+          "Revenue": 2375000,
+          "Cost": 1550000,
+          "Profit": 825000
+        },
+        {
+          "Date": "2024-03-14",
+          "Product": "Managed Support Tier 1",
+          "Category": "Services",
+          "Region": "Lagos",
+          "Customer": "Mainland Health Network",
+          "Quantity": 18,
+          "Revenue": 540000,
+          "Cost": 180000,
+          "Profit": 360000
+        },
+        {
+          "Date": "2024-03-18",
+          "Product": "Analytics Pro License",
+          "Category": "Software",
+          "Region": "Port Harcourt",
+          "Customer": "Niger Basin Energy",
+          "Quantity": 12,
+          "Revenue": 780000,
+          "Cost": 312000,
+          "Profit": 468000
+        },
+        {
+          "Date": "2024-03-23",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "VentureScale Africa",
+          "Quantity": 22,
+          "Revenue": 1650000,
+          "Cost": 495000,
+          "Profit": 1155000
+        },
+        {
+          "Date": "2024-03-28",
+          "Product": "Cloud Backup Vault",
+          "Category": "Services",
+          "Region": "Ibadan",
+          "Customer": "Horizon Mills Nigeria",
+          "Quantity": 8,
+          "Revenue": 240000,
+          "Cost": 96000,
+          "Profit": 144000
+        },
+        {
+          "Date": "2024-04-04",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Port Harcourt",
+          "Customer": "Delta Stream Oil",
+          "Quantity": 5,
+          "Revenue": 1500000,
+          "Cost": 600000,
+          "Profit": 900000
+        },
+        {
+          "Date": "2024-04-09",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Lagos",
+          "Customer": "Sterling Prime Logistics",
+          "Quantity": 4,
+          "Revenue": 1900000,
+          "Cost": 1240000,
+          "Profit": 660000
+        },
+        {
+          "Date": "2024-04-15",
+          "Product": "Database High-Availability",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "BlueWave Tech Labs",
+          "Quantity": 4,
+          "Revenue": 656000,
+          "Cost": 264000,
+          "Profit": 392000
+        },
+        {
+          "Date": "2024-04-21",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Abuja",
+          "Customer": "Unity Capital Partners",
+          "Quantity": 16,
+          "Revenue": 1200000,
+          "Cost": 360000,
+          "Profit": 840000
+        },
+        {
+          "Date": "2024-04-27",
+          "Product": "Analytics Pro License",
+          "Category": "Software",
+          "Region": "Kano",
+          "Customer": "Savanna Trade Network",
+          "Quantity": 9,
+          "Revenue": 585000,
+          "Cost": 234000,
+          "Profit": 351000
+        },
+        {
+          "Date": "2024-05-03",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "PayDirect Systems",
+          "Quantity": 7,
+          "Revenue": 2100000,
+          "Cost": 840000,
+          "Profit": 1260000
+        },
+        {
+          "Date": "2024-05-09",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Port Harcourt",
+          "Customer": "Gulf Marine Services",
+          "Quantity": 18,
+          "Revenue": 1350000,
+          "Cost": 405000,
+          "Profit": 945000
+        },
+        {
+          "Date": "2024-05-14",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Kano",
+          "Customer": "Arewa Agro Group",
+          "Quantity": 2,
+          "Revenue": 950000,
+          "Cost": 620000,
+          "Profit": 330000
+        },
+        {
+          "Date": "2024-05-19",
+          "Product": "Managed Support Tier 1",
+          "Category": "Services",
+          "Region": "Abuja",
+          "Customer": "Federal Capital Finance",
+          "Quantity": 20,
+          "Revenue": 600000,
+          "Cost": 200000,
+          "Profit": 400000
+        },
+        {
+          "Date": "2024-05-26",
+          "Product": "Cloud Backup Vault",
+          "Category": "Services",
+          "Region": "Lagos",
+          "Customer": "Apex Zenith Corp",
+          "Quantity": 30,
+          "Revenue": 900000,
+          "Cost": 360000,
+          "Profit": 540000
+        },
+        {
+          "Date": "2024-06-02",
+          "Product": "Database High-Availability",
+          "Category": "Software",
+          "Region": "Port Harcourt",
+          "Customer": "Delta Stream Oil",
+          "Quantity": 6,
+          "Revenue": 984000,
+          "Cost": 396000,
+          "Profit": 588000
+        },
+        {
+          "Date": "2024-06-07",
+          "Product": "Enterprise Cloud Suite",
+          "Category": "Software",
+          "Region": "Abuja",
+          "Customer": "Nexus Defense Systems",
+          "Quantity": 10,
+          "Revenue": 3000000,
+          "Cost": 1200000,
+          "Profit": 1800000
+        },
+        {
+          "Date": "2024-06-12",
+          "Product": "AI Workflow Assistant",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "VentureScale Africa",
+          "Quantity": 25,
+          "Revenue": 1875000,
+          "Cost": 562500,
+          "Profit": 1312500
+        },
+        {
+          "Date": "2024-06-18",
+          "Product": "Analytics Pro License",
+          "Category": "Software",
+          "Region": "Lagos",
+          "Customer": "Eko Atlantic Commerce",
+          "Quantity": 14,
+          "Revenue": 910000,
+          "Cost": 364000,
+          "Profit": 546000
+        },
+        {
+          "Date": "2024-06-25",
+          "Product": "Security Gateway Appliance",
+          "Category": "Hardware",
+          "Region": "Ibadan",
+          "Customer": "Horizon Mills Nigeria",
+          "Quantity": 3,
+          "Revenue": 1425000,
+          "Cost": 930000,
+          "Profit": 495000
+        }
+      ],
+      "id": "file_3cbd593b-d384-4426-9f25-521d97a6e026",
+      "uploaded_at": "2026-09-11T18:48:20.494Z"
+    }
+  ],
+  "analyses": [
+    {
+      "file_id": "file_3cbd593b-d384-4426-9f25-521d97a6e026",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "metadata": {
+        "filename": "Enterprise_Sales_2024.xlsx",
+        "sheet_name": "Sales_Records",
+        "all_sheets": [
+          "Sales_Records"
+        ],
+        "row_count": 35,
+        "column_count": 9,
+        "column_names": [
+          "Date",
+          "Product",
+          "Category",
+          "Region",
+          "Customer",
+          "Quantity",
+          "Revenue",
+          "Cost",
+          "Profit"
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "type": "date",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 35,
+            "sampleValues": [
+              "2024-01-05",
+              "2024-01-08",
+              "2024-01-12",
+              "2024-01-15",
+              "2024-01-20"
+            ],
+            "min": "2024-01-05",
+            "max": "2024-06-25"
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 7,
+            "sampleValues": [
+              "Enterprise Cloud Suite",
+              "Analytics Pro License",
+              "Security Gateway Appliance",
+              "Cloud Backup Vault",
+              "Database High-Availability"
+            ]
+          },
+          {
+            "name": "Category",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 3,
+            "sampleValues": [
+              "Software",
+              "Software",
+              "Hardware",
+              "Services",
+              "Software"
+            ]
+          },
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Lagos",
+              "Kano"
+            ]
+          },
+          {
+            "name": "Customer",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 18,
+            "sampleValues": [
+              "Apex Zenith Corp",
+              "First Horizon Ltd",
+              "Delta Stream Oil",
+              "Sterling Prime Logistics",
+              "Savanna Trade Network"
+            ]
+          },
+          {
+            "name": "Quantity",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 18,
+            "sampleValues": [
+              4,
+              10,
+              2,
+              15,
+              5
+            ],
+            "sum": 378,
+            "avg": 10.8,
+            "min": 2,
+            "max": 30,
+            "median": 8,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 30,
+            "sampleValues": [
+              1200000,
+              650000,
+              950000,
+              450000,
+              820000
+            ],
+            "sum": 41313000,
+            "avg": 1180371.43,
+            "min": 240000,
+            "max": 3000000,
+            "median": 984000,
+            "potentialOutliersCount": 1
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 30,
+            "sampleValues": [
+              480000,
+              260000,
+              620000,
+              180000,
+              330000
+            ],
+            "sum": 17851500,
+            "avg": 510042.86,
+            "min": 96000,
+            "max": 1550000,
+            "median": 396000,
+            "potentialOutliersCount": 3
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 32,
+            "sampleValues": [
+              720000,
+              390000,
+              330000,
+              270000,
+              490000
+            ],
+            "sum": 23461500,
+            "avg": 670328.57,
+            "min": 144000,
+            "max": 1800000,
+            "median": 540000,
+            "potentialOutliersCount": 1
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 315,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "Date",
+            "type": "date",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 35,
+            "sampleValues": [
+              "2024-01-05",
+              "2024-01-08",
+              "2024-01-12",
+              "2024-01-15",
+              "2024-01-20"
+            ],
+            "min": "2024-01-05",
+            "max": "2024-06-25"
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 7,
+            "sampleValues": [
+              "Enterprise Cloud Suite",
+              "Analytics Pro License",
+              "Security Gateway Appliance",
+              "Cloud Backup Vault",
+              "Database High-Availability"
+            ]
+          },
+          {
+            "name": "Category",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 3,
+            "sampleValues": [
+              "Software",
+              "Software",
+              "Hardware",
+              "Services",
+              "Software"
+            ]
+          },
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Lagos",
+              "Kano"
+            ]
+          },
+          {
+            "name": "Customer",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 18,
+            "sampleValues": [
+              "Apex Zenith Corp",
+              "First Horizon Ltd",
+              "Delta Stream Oil",
+              "Sterling Prime Logistics",
+              "Savanna Trade Network"
+            ]
+          },
+          {
+            "name": "Quantity",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 18,
+            "sampleValues": [
+              4,
+              10,
+              2,
+              15,
+              5
+            ],
+            "sum": 378,
+            "avg": 10.8,
+            "min": 2,
+            "max": 30,
+            "median": 8,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 30,
+            "sampleValues": [
+              1200000,
+              650000,
+              950000,
+              450000,
+              820000
+            ],
+            "sum": 41313000,
+            "avg": 1180371.43,
+            "min": 240000,
+            "max": 3000000,
+            "median": 984000,
+            "potentialOutliersCount": 1
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 30,
+            "sampleValues": [
+              480000,
+              260000,
+              620000,
+              180000,
+              330000
+            ],
+            "sum": 17851500,
+            "avg": 510042.86,
+            "min": 96000,
+            "max": 1550000,
+            "median": 396000,
+            "potentialOutliersCount": 3
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 32,
+            "sampleValues": [
+              720000,
+              390000,
+              330000,
+              270000,
+              490000
+            ],
+            "sum": 23461500,
+            "avg": 670328.57,
+            "min": 144000,
+            "max": 1800000,
+            "median": 540000,
+            "potentialOutliersCount": 1
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": [
+          "Column \"Revenue\" has 1 potential numerical outlier.",
+          "Column \"Cost\" has 3 potential numerical outliers.",
+          "Column \"Profit\" has 1 potential numerical outlier."
+        ]
+      },
+      "insights": [
+        {
+          "id": "ins_total_rev",
+          "category": "revenue",
+          "title": "Total Gross Revenue",
+          "description": "Total accumulated Revenue across 35 records is ₦41,313,000",
+          "metric": "Revenue",
+          "value": "₦41,313,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_top_product",
+          "category": "performance",
+          "title": "Top-Selling Product",
+          "description": "\"Enterprise Cloud Suite\" leads with ₦12,900,000 in total Revenue.",
+          "metric": "Enterprise Cloud Suite",
+          "value": "₦12,900,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_lowest_product",
+          "category": "performance",
+          "title": "Lowest Performing Product",
+          "description": "\"Managed Support Tier 1\" had the lowest recorded Revenue at ₦1,500,000.",
+          "metric": "Managed Support Tier 1",
+          "value": "₦1,500,000",
+          "impact": "neutral"
+        },
+        {
+          "id": "ins_top_region",
+          "category": "trend",
+          "title": "Top Market: Lagos",
+          "description": "Lagos generated ₦17,956,000 representing ~43% of overall revenue.",
+          "metric": "Lagos",
+          "value": "43% share",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_profit_margin",
+          "category": "revenue",
+          "title": "Overall Profit Margin",
+          "description": "Total net profit of ₦23,461,500 yields an overall margin of 56.8%.",
+          "metric": "Profit Margin",
+          "value": "56.8%",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_best_month",
+          "category": "trend",
+          "title": "Peak Performance Period: 2024-03",
+          "description": "Month 2024-03 achieved the highest recorded revenue of ₦8,533,000.",
+          "metric": "2024-03",
+          "value": "₦8,533,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_top_customer",
+          "category": "performance",
+          "title": "Primary Customer: Nexus Defense Systems",
+          "description": "Top client \"Nexus Defense Systems\" accounted for ₦5,375,000 in purchases.",
+          "metric": "Nexus Defense Systems",
+          "value": "₦5,375,000",
+          "impact": "positive"
+        }
+      ],
+      "id": "anl_e04d6978-8907-42e4-9be5-b94fe60c04ca",
+      "created_at": "2026-09-11T18:48:20.494Z"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "conv_0fc629a5-43d0-40b0-9c20-6e3e847efa9c",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "file_id": "file_3cbd593b-d384-4426-9f25-521d97a6e026",
+      "created_at": "2026-09-11T18:48:28.897Z"
+    }
+  ],
+  "messages": [
+    {
+      "conversation_id": "conv_0fc629a5-43d0-40b0-9c20-6e3e847efa9c",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "role": "user",
+      "content": "What is my total revenue?",
+      "id": "msg_92d1af00-8824-487c-9265-f6facb8c673a",
+      "created_at": "2026-09-11T18:48:28.898Z"
+    },
+    {
+      "conversation_id": "conv_0fc629a5-43d0-40b0-9c20-6e3e847efa9c",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "role": "assistant",
+      "content": "Based on the dataset **Enterprise_Sales_2024.xlsx**, here is your revenue summary:\n\n* **Total Revenue:** **₦41,313,000**\n* **Average Revenue per Transaction:** ₦1,180,371.43\n* **Total Transactions:** 35",
+      "calculation_details": {
+        "metric": "Total Revenue",
+        "computed_value": "₦41,313,000",
+        "formula_used": "Calculated exact sum of \"Revenue\" across 35 rows. Average per transaction is ₦1,180,371.43."
+      },
+      "id": "msg_12a1a0e7-9940-484e-88f0-9e46f3dd8910",
+      "created_at": "2026-09-11T18:48:47.354Z"
+    }
+  ],
+  "sessions": [
+    {
+      "token": "2aec5a04616040e1647b4dc9dd2f6607446697c39ca16c9d4a73167256913e26",
+      "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
+      "expires_at": 1791744493561
+    }
+  ]
+}
