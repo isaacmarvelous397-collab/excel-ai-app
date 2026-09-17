@@ -3,6 +3,25 @@ import { ColumnProfile, FormulaResult, AiReport } from '../src/types.js';
 
 let aiClient: GoogleGenAI | null = null;
 
+const CANDIDATE_MODELS = ['gemini-3.1-flash-lite', 'gemini-flash-latest', 'gemini-3.8-flash'];
+
+async function generateWithFallback(ai: GoogleGenAI, params: any) {
+  let lastErr = null;
+  for (const model of CANDIDATE_MODELS) {
+    try {
+      const res = await ai.models.generateContent({
+        ...params,
+        model,
+      });
+      return res;
+    } catch (err: any) {
+      lastErr = err;
+      console.warn(`Model ${model} failed, trying next candidate:`, err.message || err);
+    }
+  }
+  throw lastErr;
+}
+
 function getAiClient(): GoogleGenAI | null {
   if (aiClient) return aiClient;
   const apiKey = process.env.GEMINI_API_KEY;
@@ -86,8 +105,7 @@ User Question: "${question}"
 Please provide a clear, accurate, and helpful response based strictly on the data:`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+    const response = await generateWithFallback(ai, {
       contents: prompt,
       config: {
         systemInstruction,
@@ -144,8 +162,7 @@ Always return response in valid JSON matching this schema:
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+    const response = await generateWithFallback(ai, {
       contents: `Generate an Excel formula for: "${promptDescription}"`,
       config: {
         systemInstruction,
@@ -167,6 +184,15 @@ Always return response in valid JSON matching this schema:
 
 function getFallbackFormula(desc: string): FormulaResult {
   const d = desc.toLowerCase();
+  if (d.includes('if') || d.includes('commission') || d.includes('tax') || d.includes('greater than') || d.includes('less than')) {
+    return {
+      formula: '=IF(B2>500000, B2*0.05, B2*0.02)',
+      description: 'Conditional formula using IF function',
+      explanation: 'Evaluates if Revenue in B2 exceeds 500,000. If true, calculates 5% commission/tax; otherwise calculates 2%.',
+      example: 'If cell B2 contains 750,000, the formula computes 37,500 (750000 * 0.05).',
+      tips: ['For multiple tier ranges, use nested IF or IFS: =IFS(B2>1000000, B2*0.1, B2>500000, B2*0.05, TRUE, B2*0.02)'],
+    };
+  }
   if (d.includes('profit margin')) {
     return {
       formula: '=(B2-C2)/B2',
@@ -281,8 +307,7 @@ Generate a structured business analysis report. Return strictly JSON matching th
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+    const response = await generateWithFallback(ai, {
       contents: prompt,
       config: {
         systemInstruction: 'You are an executive business analyst. Generate precise, factual, professional reports based strictly on the provided data without fabricating statistics.',

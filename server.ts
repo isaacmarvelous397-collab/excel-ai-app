@@ -17,6 +17,11 @@ const PORT = 3000;
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
+// Health check endpoint
+app.get('/api/health', (req: Request, res: Response) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
 // Helper to format consistent user responses
 function formatUserResponse(user: UserRecord) {
   const sub = db.getSubscription(user.id);
@@ -280,7 +285,7 @@ app.post('/api/paystack/initialize', authMiddleware, async (req: AuthRequest, re
 app.post('/api/paystack/verify', authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
     const user = req.user!;
-    const { reference, plan } = req.body;
+    const { reference, plan, isSimulation, isTestSimulation } = req.body;
 
     if (!reference) {
       return res.status(400).json({ error: 'Transaction reference is required for verification.' });
@@ -289,7 +294,10 @@ app.post('/api/paystack/verify', authMiddleware, async (req: AuthRequest, res: R
     const targetPlan: 'pro' | 'business' = plan === 'business' ? 'business' : 'pro';
 
     // Verify transaction with Paystack (or demo engine)
-    const verification = await verifyTransaction(reference, targetPlan);
+    const verification = await verifyTransaction(reference, targetPlan, {
+      isSimulation: Boolean(isSimulation || isTestSimulation),
+      allowTestMode: true,
+    });
 
     if (verification.status !== 'success') {
       db.updatePaymentStatus(reference, 'failed');

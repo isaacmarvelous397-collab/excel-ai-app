@@ -6,6 +6,20 @@
       "email": "ada@lovelace.io",
       "password_hash": "1b72c5f133c1dbe3c5a7dfc10b9d30e1:cc3b1c6b6810d884f7c9f5d1b756030474aa41b4df0148575f48c3c35407868e1fbb773dd1bafeac939d2841b78b92b4174f137958ccd4c3345a5945197ec518",
       "created_at": "2026-09-11T18:48:13.560Z"
+    },
+    {
+      "id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "name": "Test Analyst",
+      "email": "tester_1789678169791@example.com",
+      "password_hash": "9dbfb8eed4973c9c4256bcd785dcc2ea:6a0e9fd24148bfe8e8400dd50d75dbb7294811c539cbca6b82b97c79549666d12d01c9b615586f98e219af7264e61d09ce2aec87f915862acd7804efb1d9007d",
+      "created_at": "2026-09-17T20:49:29.958Z"
+    },
+    {
+      "id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "name": "Test Analyst",
+      "email": "tester_1789678319706@example.com",
+      "password_hash": "47af883c08be2f61ed1fa91ef0d21811:62e5328e1bfe372472570677d8acdb115a9a7e7a023819e6481bd6a012919af13632fc9b799fdc140436718b1ea224e8271e6f504bffd52d1735ebba4fd2ba8a",
+      "created_at": "2026-09-17T20:51:59.866Z"
     }
   ],
   "subscriptions": [
@@ -17,6 +31,67 @@
       "uploads_this_month": 1,
       "questions_count": 1,
       "created_at": "2026-09-11T18:48:13.560Z"
+    },
+    {
+      "id": "sub_d96adca5-f943-44ee-9581-a6812481bf93",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "plan": "free",
+      "status": "active",
+      "start_date": "2026-09-17T20:49:29.958Z",
+      "created_at": "2026-09-17T20:49:29.958Z"
+    },
+    {
+      "id": "sub_d51c9e5c-dfb3-49a3-b7ba-02248ec4d139",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "plan": "pro",
+      "status": "active",
+      "start_date": "2026-09-17T20:51:59.866Z",
+      "created_at": "2026-09-17T20:51:59.866Z",
+      "paystack_reference": "EXL_PRO_1789678331562_q1og6",
+      "end_date": "2026-10-17T20:52:11.927Z"
+    }
+  ],
+  "usage": [
+    {
+      "id": "usg_cbc19041-12a3-4eee-92c0-4521d63fc5d8",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "month": "2026-09",
+      "analysis_count": 5,
+      "questions_count": 1,
+      "created_at": "2026-09-17T20:49:29.958Z",
+      "updated_at": "2026-09-17T20:49:53.374Z"
+    },
+    {
+      "id": "usg_834f3b69-6df3-492c-8f7d-028c1c1155f8",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "month": "2026-09",
+      "analysis_count": 6,
+      "questions_count": 1,
+      "created_at": "2026-09-17T20:51:59.866Z",
+      "updated_at": "2026-09-17T20:52:11.938Z"
+    }
+  ],
+  "payments": [
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "amount": 5000,
+      "currency": "NGN",
+      "reference": "EXL_PRO_1789678193421_5qm77",
+      "status": "pending",
+      "plan": "pro",
+      "id": "pay_ae8ff05c-9360-42d5-9702-561d7a4dae27",
+      "created_at": "2026-09-17T20:49:53.840Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "amount": 5000,
+      "currency": "NGN",
+      "reference": "EXL_PRO_1789678331562_q1og6",
+      "status": "success",
+      "plan": "pro",
+      "id": "pay_8f8221fc-90a5-48be-8026-e61c955ea7e1",
+      "created_at": "2026-09-17T20:52:11.918Z",
+      "paid_at": "2026-09-17T20:52:11.925Z"
     }
   ],
   "files": [
@@ -420,6 +495,308 @@
       ],
       "id": "file_3cbd593b-d384-4426-9f25-521d97a6e026",
       "uploaded_at": "2026-09-11T18:48:20.494Z"
+    },
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "filename": "Nigeria_Sales_Q3_2026.csv",
+      "file_type": "csv",
+      "file_size": 326,
+      "row_count": 5,
+      "column_count": 7,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "Region": "Lagos",
+          "Product": "Smart TV",
+          "Units_Sold": 45,
+          "Revenue": 4500000,
+          "Cost": 3200000,
+          "Profit": 1300000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Abuja",
+          "Product": "Laptop Pro",
+          "Units_Sold": 30,
+          "Revenue": 7500000,
+          "Cost": 5500000,
+          "Profit": 2000000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Port Harcourt",
+          "Product": "Soundbar",
+          "Units_Sold": 60,
+          "Revenue": 1800000,
+          "Cost": 1200000,
+          "Profit": 600000,
+          "Status": "Pending"
+        },
+        {
+          "Region": "Kano",
+          "Product": "Generator",
+          "Units_Sold": 25,
+          "Revenue": 5000000,
+          "Cost": 3900000,
+          "Profit": 1100000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Ibadan",
+          "Product": "Inverter 5kVA",
+          "Units_Sold": 40,
+          "Revenue": 4800000,
+          "Cost": 3600000,
+          "Profit": 1200000,
+          "Status": "Delivered"
+        }
+      ],
+      "id": "file_6b784da9-acdf-4351-9d10-4e70b78a476d",
+      "uploaded_at": "2026-09-17T20:49:30.132Z"
+    },
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "filename": "Test_Upload_2.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val2",
+          "ColB": 200
+        }
+      ],
+      "id": "file_96509d34-5dab-44c5-b593-f6ebc8630396",
+      "uploaded_at": "2026-09-17T20:49:53.337Z"
+    },
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "filename": "Test_Upload_3.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val3",
+          "ColB": 300
+        }
+      ],
+      "id": "file_1db611b1-6dd1-41e8-9754-67115df9b8a2",
+      "uploaded_at": "2026-09-17T20:49:53.350Z"
+    },
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "filename": "Test_Upload_4.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val4",
+          "ColB": 400
+        }
+      ],
+      "id": "file_f8a92aa8-95f6-426f-9a0f-918fc3ae529b",
+      "uploaded_at": "2026-09-17T20:49:53.365Z"
+    },
+    {
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "filename": "Test_Upload_5.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val5",
+          "ColB": 500
+        }
+      ],
+      "id": "file_0dcd4336-1866-496d-9a91-d031cd68645b",
+      "uploaded_at": "2026-09-17T20:49:53.374Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Nigeria_Sales_Q3_2026.csv",
+      "file_type": "csv",
+      "file_size": 326,
+      "row_count": 5,
+      "column_count": 7,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "Region": "Lagos",
+          "Product": "Smart TV",
+          "Units_Sold": 45,
+          "Revenue": 4500000,
+          "Cost": 3200000,
+          "Profit": 1300000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Abuja",
+          "Product": "Laptop Pro",
+          "Units_Sold": 30,
+          "Revenue": 7500000,
+          "Cost": 5500000,
+          "Profit": 2000000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Port Harcourt",
+          "Product": "Soundbar",
+          "Units_Sold": 60,
+          "Revenue": 1800000,
+          "Cost": 1200000,
+          "Profit": 600000,
+          "Status": "Pending"
+        },
+        {
+          "Region": "Kano",
+          "Product": "Generator",
+          "Units_Sold": 25,
+          "Revenue": 5000000,
+          "Cost": 3900000,
+          "Profit": 1100000,
+          "Status": "Delivered"
+        },
+        {
+          "Region": "Ibadan",
+          "Product": "Inverter 5kVA",
+          "Units_Sold": 40,
+          "Revenue": 4800000,
+          "Cost": 3600000,
+          "Profit": 1200000,
+          "Status": "Delivered"
+        }
+      ],
+      "id": "file_63caf48f-48cd-4e3d-815d-2bb27bcffdde",
+      "uploaded_at": "2026-09-17T20:51:59.992Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Test_Upload_2.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val2",
+          "ColB": 200
+        }
+      ],
+      "id": "file_1fd711ee-5e15-4dea-a746-85d053e02408",
+      "uploaded_at": "2026-09-17T20:52:11.471Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Test_Upload_3.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val3",
+          "ColB": 300
+        }
+      ],
+      "id": "file_81a8eaee-5bad-416e-bec8-96b8455f4081",
+      "uploaded_at": "2026-09-17T20:52:11.488Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Test_Upload_4.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val4",
+          "ColB": 400
+        }
+      ],
+      "id": "file_f67c1d27-1c24-4280-8d9c-a399a6a40b29",
+      "uploaded_at": "2026-09-17T20:52:11.502Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Test_Upload_5.csv",
+      "file_type": "csv",
+      "file_size": 19,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "ColA": "Val5",
+          "ColB": 500
+        }
+      ],
+      "id": "file_53fb41b0-fdee-4be0-8f7e-86d4ac970d8a",
+      "uploaded_at": "2026-09-17T20:52:11.520Z"
+    },
+    {
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "filename": "Pro_Tier_Unlocked_Analysis.csv",
+      "file_type": "csv",
+      "file_size": 38,
+      "row_count": 1,
+      "column_count": 2,
+      "sheet_name": "Sheet1",
+      "all_sheets": [
+        "Sheet1"
+      ],
+      "raw_data": [
+        {
+          "Product": "PostUpgradePro",
+          "Revenue": 999999
+        }
+      ],
+      "id": "file_0a6fbc45-833b-4480-bc8a-f92d32e95fe0",
+      "uploaded_at": "2026-09-17T20:52:11.938Z"
     }
   ],
   "analyses": [
@@ -835,6 +1212,1465 @@
       ],
       "id": "anl_e04d6978-8907-42e4-9be5-b94fe60c04ca",
       "created_at": "2026-09-11T18:48:20.494Z"
+    },
+    {
+      "file_id": "file_6b784da9-acdf-4351-9d10-4e70b78a476d",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "metadata": {
+        "filename": "Nigeria_Sales_Q3_2026.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 5,
+        "column_count": 7,
+        "column_names": [
+          "Region",
+          "Product",
+          "Units_Sold",
+          "Revenue",
+          "Cost",
+          "Profit",
+          "Status"
+        ],
+        "columns": [
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Kano",
+              "Ibadan"
+            ]
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Smart TV",
+              "Laptop Pro",
+              "Soundbar",
+              "Generator",
+              "Inverter 5kVA"
+            ]
+          },
+          {
+            "name": "Units_Sold",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              45,
+              30,
+              60,
+              25,
+              40
+            ],
+            "sum": 200,
+            "avg": 40,
+            "min": 25,
+            "max": 60,
+            "median": 40,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              4500000,
+              7500000,
+              1800000,
+              5000000,
+              4800000
+            ],
+            "sum": 23600000,
+            "avg": 4720000,
+            "min": 1800000,
+            "max": 7500000,
+            "median": 4800000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              3200000,
+              5500000,
+              1200000,
+              3900000,
+              3600000
+            ],
+            "sum": 17400000,
+            "avg": 3480000,
+            "min": 1200000,
+            "max": 5500000,
+            "median": 3600000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              1300000,
+              2000000,
+              600000,
+              1100000,
+              1200000
+            ],
+            "sum": 6200000,
+            "avg": 1240000,
+            "min": 600000,
+            "max": 2000000,
+            "median": 1200000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Status",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 2,
+            "sampleValues": [
+              "Delivered",
+              "Delivered",
+              "Pending",
+              "Delivered",
+              "Delivered"
+            ]
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 35,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Kano",
+              "Ibadan"
+            ]
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Smart TV",
+              "Laptop Pro",
+              "Soundbar",
+              "Generator",
+              "Inverter 5kVA"
+            ]
+          },
+          {
+            "name": "Units_Sold",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              45,
+              30,
+              60,
+              25,
+              40
+            ],
+            "sum": 200,
+            "avg": 40,
+            "min": 25,
+            "max": 60,
+            "median": 40,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              4500000,
+              7500000,
+              1800000,
+              5000000,
+              4800000
+            ],
+            "sum": 23600000,
+            "avg": 4720000,
+            "min": 1800000,
+            "max": 7500000,
+            "median": 4800000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              3200000,
+              5500000,
+              1200000,
+              3900000,
+              3600000
+            ],
+            "sum": 17400000,
+            "avg": 3480000,
+            "min": 1200000,
+            "max": 5500000,
+            "median": 3600000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              1300000,
+              2000000,
+              600000,
+              1100000,
+              1200000
+            ],
+            "sum": 6200000,
+            "avg": 1240000,
+            "min": 600000,
+            "max": 2000000,
+            "median": 1200000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Status",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 2,
+            "sampleValues": [
+              "Delivered",
+              "Delivered",
+              "Pending",
+              "Delivered",
+              "Delivered"
+            ]
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": [
+          "Column \"Revenue\" has 2 potential numerical outliers.",
+          "Column \"Cost\" has 2 potential numerical outliers.",
+          "Column \"Profit\" has 2 potential numerical outliers."
+        ]
+      },
+      "insights": [
+        {
+          "id": "ins_total_rev",
+          "category": "revenue",
+          "title": "Total Gross Revenue",
+          "description": "Total accumulated Revenue across 5 records is ₦23,600,000",
+          "metric": "Revenue",
+          "value": "₦23,600,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_top_product",
+          "category": "performance",
+          "title": "Top-Selling Product",
+          "description": "\"Laptop Pro\" leads with ₦7,500,000 in total Revenue.",
+          "metric": "Laptop Pro",
+          "value": "₦7,500,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_lowest_product",
+          "category": "performance",
+          "title": "Lowest Performing Product",
+          "description": "\"Soundbar\" had the lowest recorded Revenue at ₦1,800,000.",
+          "metric": "Soundbar",
+          "value": "₦1,800,000",
+          "impact": "neutral"
+        },
+        {
+          "id": "ins_top_region",
+          "category": "trend",
+          "title": "Top Market: Abuja",
+          "description": "Abuja generated ₦7,500,000 representing ~32% of overall revenue.",
+          "metric": "Abuja",
+          "value": "32% share",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_profit_margin",
+          "category": "revenue",
+          "title": "Overall Profit Margin",
+          "description": "Total net profit of ₦6,200,000 yields an overall margin of 26.3%.",
+          "metric": "Profit Margin",
+          "value": "26.3%",
+          "impact": "positive"
+        }
+      ],
+      "id": "anl_9e25943b-ed1f-47dc-a0a1-7aac4f8fec2b",
+      "created_at": "2026-09-17T20:49:30.135Z"
+    },
+    {
+      "file_id": "file_96509d34-5dab-44c5-b593-f6ebc8630396",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "metadata": {
+        "filename": "Test_Upload_2.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val2"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              200
+            ],
+            "sum": 200,
+            "avg": 200,
+            "min": 200,
+            "max": 200,
+            "median": 200,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val2"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              200
+            ],
+            "sum": 200,
+            "avg": 200,
+            "min": 200,
+            "max": 200,
+            "median": 200,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_e57f06b9-44c4-4c62-8347-4b6c8493372a",
+      "created_at": "2026-09-17T20:49:53.339Z"
+    },
+    {
+      "file_id": "file_1db611b1-6dd1-41e8-9754-67115df9b8a2",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "metadata": {
+        "filename": "Test_Upload_3.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val3"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              300
+            ],
+            "sum": 300,
+            "avg": 300,
+            "min": 300,
+            "max": 300,
+            "median": 300,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val3"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              300
+            ],
+            "sum": 300,
+            "avg": 300,
+            "min": 300,
+            "max": 300,
+            "median": 300,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_008bf956-da65-4908-98e4-aea4ae6261c7",
+      "created_at": "2026-09-17T20:49:53.354Z"
+    },
+    {
+      "file_id": "file_f8a92aa8-95f6-426f-9a0f-918fc3ae529b",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "metadata": {
+        "filename": "Test_Upload_4.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val4"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              400
+            ],
+            "sum": 400,
+            "avg": 400,
+            "min": 400,
+            "max": 400,
+            "median": 400,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val4"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              400
+            ],
+            "sum": 400,
+            "avg": 400,
+            "min": 400,
+            "max": 400,
+            "median": 400,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_4c7a55ee-d2a8-4a86-b406-4e43dabe5584",
+      "created_at": "2026-09-17T20:49:53.367Z"
+    },
+    {
+      "file_id": "file_0dcd4336-1866-496d-9a91-d031cd68645b",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "metadata": {
+        "filename": "Test_Upload_5.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val5"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              500
+            ],
+            "sum": 500,
+            "avg": 500,
+            "min": 500,
+            "max": 500,
+            "median": 500,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val5"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              500
+            ],
+            "sum": 500,
+            "avg": 500,
+            "min": 500,
+            "max": 500,
+            "median": 500,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_5cd2d63f-bbaa-42f9-b67d-4281aa6730ce",
+      "created_at": "2026-09-17T20:49:53.376Z"
+    },
+    {
+      "file_id": "file_63caf48f-48cd-4e3d-815d-2bb27bcffdde",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Nigeria_Sales_Q3_2026.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 5,
+        "column_count": 7,
+        "column_names": [
+          "Region",
+          "Product",
+          "Units_Sold",
+          "Revenue",
+          "Cost",
+          "Profit",
+          "Status"
+        ],
+        "columns": [
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Kano",
+              "Ibadan"
+            ]
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Smart TV",
+              "Laptop Pro",
+              "Soundbar",
+              "Generator",
+              "Inverter 5kVA"
+            ]
+          },
+          {
+            "name": "Units_Sold",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              45,
+              30,
+              60,
+              25,
+              40
+            ],
+            "sum": 200,
+            "avg": 40,
+            "min": 25,
+            "max": 60,
+            "median": 40,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              4500000,
+              7500000,
+              1800000,
+              5000000,
+              4800000
+            ],
+            "sum": 23600000,
+            "avg": 4720000,
+            "min": 1800000,
+            "max": 7500000,
+            "median": 4800000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              3200000,
+              5500000,
+              1200000,
+              3900000,
+              3600000
+            ],
+            "sum": 17400000,
+            "avg": 3480000,
+            "min": 1200000,
+            "max": 5500000,
+            "median": 3600000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              1300000,
+              2000000,
+              600000,
+              1100000,
+              1200000
+            ],
+            "sum": 6200000,
+            "avg": 1240000,
+            "min": 600000,
+            "max": 2000000,
+            "median": 1200000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Status",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 2,
+            "sampleValues": [
+              "Delivered",
+              "Delivered",
+              "Pending",
+              "Delivered",
+              "Delivered"
+            ]
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 35,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "Region",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Lagos",
+              "Abuja",
+              "Port Harcourt",
+              "Kano",
+              "Ibadan"
+            ]
+          },
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              "Smart TV",
+              "Laptop Pro",
+              "Soundbar",
+              "Generator",
+              "Inverter 5kVA"
+            ]
+          },
+          {
+            "name": "Units_Sold",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              45,
+              30,
+              60,
+              25,
+              40
+            ],
+            "sum": 200,
+            "avg": 40,
+            "min": 25,
+            "max": 60,
+            "median": 40,
+            "potentialOutliersCount": 0
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              4500000,
+              7500000,
+              1800000,
+              5000000,
+              4800000
+            ],
+            "sum": 23600000,
+            "avg": 4720000,
+            "min": 1800000,
+            "max": 7500000,
+            "median": 4800000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Cost",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              3200000,
+              5500000,
+              1200000,
+              3900000,
+              3600000
+            ],
+            "sum": 17400000,
+            "avg": 3480000,
+            "min": 1200000,
+            "max": 5500000,
+            "median": 3600000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Profit",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 5,
+            "sampleValues": [
+              1300000,
+              2000000,
+              600000,
+              1100000,
+              1200000
+            ],
+            "sum": 6200000,
+            "avg": 1240000,
+            "min": 600000,
+            "max": 2000000,
+            "median": 1200000,
+            "potentialOutliersCount": 2
+          },
+          {
+            "name": "Status",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 2,
+            "sampleValues": [
+              "Delivered",
+              "Delivered",
+              "Pending",
+              "Delivered",
+              "Delivered"
+            ]
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": [
+          "Column \"Revenue\" has 2 potential numerical outliers.",
+          "Column \"Cost\" has 2 potential numerical outliers.",
+          "Column \"Profit\" has 2 potential numerical outliers."
+        ]
+      },
+      "insights": [
+        {
+          "id": "ins_total_rev",
+          "category": "revenue",
+          "title": "Total Gross Revenue",
+          "description": "Total accumulated Revenue across 5 records is ₦23,600,000",
+          "metric": "Revenue",
+          "value": "₦23,600,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_top_product",
+          "category": "performance",
+          "title": "Top-Selling Product",
+          "description": "\"Laptop Pro\" leads with ₦7,500,000 in total Revenue.",
+          "metric": "Laptop Pro",
+          "value": "₦7,500,000",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_lowest_product",
+          "category": "performance",
+          "title": "Lowest Performing Product",
+          "description": "\"Soundbar\" had the lowest recorded Revenue at ₦1,800,000.",
+          "metric": "Soundbar",
+          "value": "₦1,800,000",
+          "impact": "neutral"
+        },
+        {
+          "id": "ins_top_region",
+          "category": "trend",
+          "title": "Top Market: Abuja",
+          "description": "Abuja generated ₦7,500,000 representing ~32% of overall revenue.",
+          "metric": "Abuja",
+          "value": "32% share",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_profit_margin",
+          "category": "revenue",
+          "title": "Overall Profit Margin",
+          "description": "Total net profit of ₦6,200,000 yields an overall margin of 26.3%.",
+          "metric": "Profit Margin",
+          "value": "26.3%",
+          "impact": "positive"
+        }
+      ],
+      "id": "anl_7f83f6e4-d643-48f2-a98f-b2712740efd9",
+      "created_at": "2026-09-17T20:51:59.996Z"
+    },
+    {
+      "file_id": "file_1fd711ee-5e15-4dea-a746-85d053e02408",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Test_Upload_2.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val2"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              200
+            ],
+            "sum": 200,
+            "avg": 200,
+            "min": 200,
+            "max": 200,
+            "median": 200,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val2"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              200
+            ],
+            "sum": 200,
+            "avg": 200,
+            "min": 200,
+            "max": 200,
+            "median": 200,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_94e79a66-8d23-43a2-87a4-05b153cb29f7",
+      "created_at": "2026-09-17T20:52:11.473Z"
+    },
+    {
+      "file_id": "file_81a8eaee-5bad-416e-bec8-96b8455f4081",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Test_Upload_3.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val3"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              300
+            ],
+            "sum": 300,
+            "avg": 300,
+            "min": 300,
+            "max": 300,
+            "median": 300,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val3"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              300
+            ],
+            "sum": 300,
+            "avg": 300,
+            "min": 300,
+            "max": 300,
+            "median": 300,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_17f12234-39ce-4852-94ba-92d73031e30c",
+      "created_at": "2026-09-17T20:52:11.491Z"
+    },
+    {
+      "file_id": "file_f67c1d27-1c24-4280-8d9c-a399a6a40b29",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Test_Upload_4.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val4"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              400
+            ],
+            "sum": 400,
+            "avg": 400,
+            "min": 400,
+            "max": 400,
+            "median": 400,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val4"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              400
+            ],
+            "sum": 400,
+            "avg": 400,
+            "min": 400,
+            "max": 400,
+            "median": 400,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_1886e63f-329b-4ba6-ac60-e301f473cc29",
+      "created_at": "2026-09-17T20:52:11.506Z"
+    },
+    {
+      "file_id": "file_53fb41b0-fdee-4be0-8f7e-86d4ac970d8a",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Test_Upload_5.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "ColA",
+          "ColB"
+        ],
+        "columns": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val5"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              500
+            ],
+            "sum": 500,
+            "avg": 500,
+            "min": 500,
+            "max": 500,
+            "median": 500,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "ColA",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "Val5"
+            ]
+          },
+          {
+            "name": "ColB",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              500
+            ],
+            "sum": 500,
+            "avg": 500,
+            "min": 500,
+            "max": 500,
+            "median": 500,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [],
+      "id": "anl_d7277257-95e7-4e91-808f-9de2a9e07fc7",
+      "created_at": "2026-09-17T20:52:11.525Z"
+    },
+    {
+      "file_id": "file_0a6fbc45-833b-4480-bc8a-f92d32e95fe0",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "metadata": {
+        "filename": "Pro_Tier_Unlocked_Analysis.csv",
+        "sheet_name": "Sheet1",
+        "all_sheets": [
+          "Sheet1"
+        ],
+        "row_count": 1,
+        "column_count": 2,
+        "column_names": [
+          "Product",
+          "Revenue"
+        ],
+        "columns": [
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "PostUpgradePro"
+            ]
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              999999
+            ],
+            "sum": 999999,
+            "avg": 999999,
+            "min": 999999,
+            "max": 999999,
+            "median": 999999,
+            "potentialOutliersCount": 0
+          }
+        ]
+      },
+      "data_quality": {
+        "totalCells": 2,
+        "totalMissing": 0,
+        "missingPercentage": 0,
+        "duplicateRowsCount": 0,
+        "duplicatePercentage": 0,
+        "emptyColumnsCount": 0,
+        "columnsQuality": [
+          {
+            "name": "Product",
+            "type": "text",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              "PostUpgradePro"
+            ]
+          },
+          {
+            "name": "Revenue",
+            "type": "number",
+            "missingCount": 0,
+            "missingPercentage": 0,
+            "uniqueCount": 1,
+            "sampleValues": [
+              999999
+            ],
+            "sum": 999999,
+            "avg": 999999,
+            "min": 999999,
+            "max": 999999,
+            "median": 999999,
+            "potentialOutliersCount": 0
+          }
+        ],
+        "qualityScore": 100,
+        "warnings": []
+      },
+      "insights": [
+        {
+          "id": "ins_total_rev",
+          "category": "revenue",
+          "title": "Total Gross Revenue",
+          "description": "Total accumulated Revenue across 1 records is ₦999,999",
+          "metric": "Revenue",
+          "value": "₦999,999",
+          "impact": "positive"
+        },
+        {
+          "id": "ins_top_product",
+          "category": "performance",
+          "title": "Top-Selling Product",
+          "description": "\"PostUpgradePro\" leads with ₦999,999 in total Revenue.",
+          "metric": "PostUpgradePro",
+          "value": "₦999,999",
+          "impact": "positive"
+        }
+      ],
+      "id": "anl_0ae44385-3daa-4819-83ab-a5a0ded0e725",
+      "created_at": "2026-09-17T20:52:11.941Z"
     }
   ],
   "conversations": [
@@ -843,6 +2679,18 @@
       "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
       "file_id": "file_3cbd593b-d384-4426-9f25-521d97a6e026",
       "created_at": "2026-09-11T18:48:28.897Z"
+    },
+    {
+      "id": "conv_58d9f48c-bef9-4583-af4a-85003e4f4bb3",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "file_id": "file_6b784da9-acdf-4351-9d10-4e70b78a476d",
+      "created_at": "2026-09-17T20:49:30.171Z"
+    },
+    {
+      "id": "conv_eed99934-81ff-4fa5-9c93-5d13188f3384",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "file_id": "file_63caf48f-48cd-4e3d-815d-2bb27bcffdde",
+      "created_at": "2026-09-17T20:52:00.008Z"
     }
   ],
   "messages": [
@@ -866,6 +2714,48 @@
       },
       "id": "msg_12a1a0e7-9940-484e-88f0-9e46f3dd8910",
       "created_at": "2026-09-11T18:48:47.354Z"
+    },
+    {
+      "conversation_id": "conv_58d9f48c-bef9-4583-af4a-85003e4f4bb3",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "role": "user",
+      "content": "What is the total revenue across all regions?",
+      "id": "msg_7d15a589-be26-4396-adb6-b081b1cf98a8",
+      "created_at": "2026-09-17T20:49:30.172Z"
+    },
+    {
+      "conversation_id": "conv_58d9f48c-bef9-4583-af4a-85003e4f4bb3",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "role": "assistant",
+      "content": "The total revenue across all regions is **₦23,600,000**.\n\n### Regional Breakdown:\n* **Abuja:** ₦7,500,000\n* **Kano:** ₦5,000,000\n* **Ibadan:** ₦4,800,000\n* **Lagos:** ₦4,500,000\n* **Port Harcourt:** ₦1,800,000\n\n*(Average revenue per region: ₦4,720,000)*",
+      "calculation_details": {
+        "metric": "Total Revenue",
+        "computed_value": "₦23,600,000",
+        "formula_used": "Calculated exact sum of \"Revenue\" across 5 rows. Average per transaction is ₦4,720,000."
+      },
+      "id": "msg_e72b3482-6a0c-4b19-9fb9-f24a1c115629",
+      "created_at": "2026-09-17T20:49:35.809Z"
+    },
+    {
+      "conversation_id": "conv_eed99934-81ff-4fa5-9c93-5d13188f3384",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "role": "user",
+      "content": "What is the total revenue across all regions?",
+      "id": "msg_e41eb02a-18af-4ef7-bfe1-996b9f773586",
+      "created_at": "2026-09-17T20:52:00.009Z"
+    },
+    {
+      "conversation_id": "conv_eed99934-81ff-4fa5-9c93-5d13188f3384",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "role": "assistant",
+      "content": "The total revenue across all regions for Q3 2026 is **₦23,600,000**. \n\nThis figure represents the sum of revenue generated from all five regions (Lagos, Abuja, Port Harcourt, Kano, and Ibadan), with an average revenue of **₦4,720,000** per transaction.",
+      "calculation_details": {
+        "metric": "Total Revenue",
+        "computed_value": "₦23,600,000",
+        "formula_used": "Calculated exact sum of \"Revenue\" across 5 rows. Average per transaction is ₦4,720,000."
+      },
+      "id": "msg_fa8ab95f-be69-4d8a-9c73-c61f4777b917",
+      "created_at": "2026-09-17T20:52:03.093Z"
     }
   ],
   "sessions": [
@@ -873,6 +2763,26 @@
       "token": "2aec5a04616040e1647b4dc9dd2f6607446697c39ca16c9d4a73167256913e26",
       "user_id": "usr_aa36a647-c155-4b24-9117-bf066e0a275c",
       "expires_at": 1791744493561
+    },
+    {
+      "token": "ab475c98d79a5ba6486ec8e06ad629f5fa88b00a00de831a1a5702870b052545",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "expires_at": 1792270169971
+    },
+    {
+      "token": "2bfe6306c0b1228c8cdfc8e35fde70c399908c251ea5fb356fed428e4e65d01c",
+      "user_id": "usr_7fc16edb-5431-4f14-aff3-1a150ab312c7",
+      "expires_at": 1792270170004
+    },
+    {
+      "token": "8a2e7d1a64a89fcf13628602dd7e2b632492c5a87d5a5f14a5f7a01a3fb4b3a2",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "expires_at": 1792270319881
+    },
+    {
+      "token": "6ea90f415dfc3b844966b0b38cdd378ac4b48a393cc05df21bb2b281ecc62ad8",
+      "user_id": "usr_bec31dc2-c06a-4838-b354-aa1811687608",
+      "expires_at": 1792270319920
     }
   ]
 }
